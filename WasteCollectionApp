@@ -10,13 +10,24 @@ public class WasteCollectionApp  {
         System.out.println("Welcome! Book an appointment to collect waste.");
 
         System.out.print("Enter the type of waste: ");
-        String wasteType = scanner.nextLine();
+        ‏       
+‏        while (true) {
+            System.out.println("Choose service number: 1.Book 2.Reschedule 3.Cancel 4.Exit");
+            int choice = scanner.nextInt(); scanner.nextLine();
+            if (choice == 4) break;
+            
+            if (choice == 1 || choice == 2) {
+                System.out.print("Enter date: ");
+                  String d = scanner.nextLine();
 
-        System.out.print("Enter the date: ");
-        String date = scanner.nextLine();
+                System.out.print("Enter time: "); 
+                  String t = scanner.nextLine();
 
-        System.out.println("Successfully booked for " + wasteType + " in " + date);
-
-        scanner.close();
+                if (choice == 1) app.book(d, t);
+                else app.reschedule(d, t);
+            } else if (choice == 3) app.cancel();
+            else System.out.println("Invalid choice.");
+        }
+      
     }
 }
