@@ -30,4 +30,16 @@ public class WasteCollectionApp  {
         }
       
     }
+
+class Appointment {
+    private String date, time;
+    private boolean isBooked;
+
+    void book(String d, String t) {
+        date = d; 
+        time = t; 
+        isBooked = true;
+        System.out.println("Appointment is booked: " + date + " " + time);
+    }
+}
 }
