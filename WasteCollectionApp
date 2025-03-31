@@ -1,0 +1,22 @@
+package WasteCollectionApp ;
+ import java.util.Scanner;
+public class WasteCollectionApp  {
+
+  
+    public static void main(String[] args) {
+   
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome! Book an appointment to collect waste.");
+
+        System.out.print("Enter the type of waste: ");
+        String wasteType = scanner.nextLine();
+
+        System.out.print("Enter the date: ");
+        String date = scanner.nextLine();
+
+        System.out.println("Successfully booked for " + wasteType + " in " + date);
+
+        scanner.close();
+    }
+}
