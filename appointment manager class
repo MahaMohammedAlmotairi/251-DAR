@@ -1,0 +1,45 @@
+/**
+ *
+ * @author nora
+ */
+
+import java.awt.List;
+import java.util.ArrayList;
+public class AppointmentManagar {
+    private List<Appointment> availableAppointments = new ArrayList<>();
+    private List<Appointment> bookedAppointments = new ArrayList<>();
+
+    
+    public void addAvailableAppointment(String date, String time, String location) {
+        Appointment appointment = new Appointment(date, time, location);
+        availableAppointments.add(appointment);
+    }
+
+    
+    public void removeAvailableAppointment(int appointmentId) {
+        availableAppointments.removeIf(app -> app.getId() == appointmentId);
+    }
+
+    
+    public boolean bookAppointment(int appointmentId, String clientName) {
+        for (Appointment app : availableAppointments) {
+            if (app.getId() == appointmentId) {
+                app.book(clientName);
+                bookedAppointments.add(app);
+                availableAppointments.remove(app);
+                return true;
+            }
+        }
+        return false; 
+    }
+
+    
+    public List<Appointment> getAvailableAppointments() {
+        return availableAppointments;
+    }
+
+    
+    public List<Appointment> getBookedAppointments() {
+        return bookedAppointments;
+    }
+}
