@@ -1,40 +1,27 @@
-/**
- *
- * @author nora
- */
 import java.util.Random;
 
 public class Appointment {
-    private int id; 
-    private String clientName; 
+    private int id;
+    private String clientName;
     private String date;
     private String time;
     private String location;
-    private boolean isBooked; 
+    private boolean isBooked;
 
-    
     public Appointment(String date, String time, String location) {
         this.id = generateRandomId();
-        this.clientName = "Not booked"; 
+        this.clientName = "Not booked";
         this.date = date;
         this.time = time;
         this.location = location;
-        this.isBooked = false; 
+        this.isBooked = false;
     }
 
-    
     private int generateRandomId() {
         Random random = new Random();
         return 1000 + random.nextInt(9000);
     }
 
-    
-    public void book(String clientName) {
-        this.clientName = clientName;
-        this.isBooked = true;
-    }
-
-    
     public int getId() {
         return id;
     }
@@ -59,7 +46,6 @@ public class Appointment {
         return isBooked;
     }
 
-    
     public void displayAppointment() {
         System.out.println("Appointment ID: " + id);
         System.out.println("Date: " + date);
@@ -67,5 +53,23 @@ public class Appointment {
         System.out.println("Location: " + location);
         System.out.println("Client: " + (isBooked ? clientName : "Available"));
         System.out.println("----------------------");
+    }
+
+    public String toFileString() {
+        return id + "," + date + "," + time + "," + location + "," + isBooked + "," + clientName;
+    }
+
+    public static Appointment fromFileString(String line) {
+        try {
+            String[] parts = line.split(",");
+            if (parts.length < 6) return null;
+            Appointment appointment = new Appointment(parts[1], parts[2], parts[3]);
+            appointment.id = Integer.parseInt(parts[0]);
+            appointment.isBooked = Boolean.parseBoolean(parts[4]);
+            appointment.clientName = parts[5];
+            return appointment;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
